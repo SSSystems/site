@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive Background with Resizer</title>
+    <style>
+       
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-size: 100% 100%; 
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-size 0.3s ease; 
+        }
+
+        #content {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        #slider-container {
+            text-align: center;
+        }
+
+        input[type="range"] {
+            width: 300px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    
+
+    
+
+    <script>
+        
+        const backgrounds = {
+            mobile: 'https://codehs.com/uploads/903d870c9efeefe3b63dceeb44d29294',
+            desktop: 'https://codehs.com/uploads/72e682e9208ebc86a77d25250fa61511'
+        };
+
+        
+        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
+        
+        document.body.style.backgroundImage = `url(${isMobile ? backgrounds.mobile : backgrounds.desktop})`;
+
+       
+        const content = document.getElementById('content');
+        content.innerHTML += `<p>Вы используете ${isMobile ? 'мобильное устройство' : 'ПК'}.</p>`;
+
+        
+        const slider = document.getElementById('size-slider');
+        const sizeValue = document.getElementById('size-value');
+
+        slider.addEventListener('input', () => {
+            const size = slider.value;
+            sizeValue.textContent = `${size}%`;
+            document.body.style.backgroundSize = `${size}%`;
+        });
+    </script>
+</body>
+</html>
